@@ -1,6 +1,7 @@
 package dao;
 
 
+import model.Client;
 import model.Product;
 
 import java.util.List;

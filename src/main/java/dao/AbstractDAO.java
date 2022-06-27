@@ -1,7 +1,5 @@
 package dao;
 
-import connection.ConnectionFactory;
-
 import java.beans.IntrospectionException;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.*;
@@ -13,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import connection.ConnectionFactory;
 
 /**
  * @Author: Technical University of Cluj-Napoca, Romania Distributed Systems
@@ -89,7 +89,7 @@ public class AbstractDAO<T> {
                     statement.setDouble(i, (Double) field.get(t));
                 else
                     statement.setString(i, (String) field.get(t));
-            i++;
+                i++;
             }
             statement.executeUpdate();
             return t;
@@ -123,7 +123,7 @@ public class AbstractDAO<T> {
                 LOGGER.log(Level.WARNING, type.getName() + "DAO:DeleteById " + e.getMessage());
 
 
-        }}catch (IndexOutOfBoundsException exx) {
+            }}catch (IndexOutOfBoundsException exx) {
             LOGGER.log(Level.WARNING, type.getName() + "DAO:deleteById: ID not found ");
         }finally {
             ConnectionFactory.close(statement);

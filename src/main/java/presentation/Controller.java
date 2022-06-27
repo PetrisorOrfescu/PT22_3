@@ -3,6 +3,7 @@ package presentation;
 import bll.ClientBLL;
 import bll.OrderBLL;
 import bll.ProductBLL;
+import dao.ClientDAO;
 import model.Client;
 import model.Orders;
 import model.Product;
@@ -177,24 +178,24 @@ public class Controller {
                         s4 = clientManagerView.getjTextField4().getText();//email
                         s5 = clientManagerView.getjTextField5().getText();//age
                         if(s1.isEmpty() || s2.isEmpty() || s3.isEmpty() || s4.isEmpty() || s5.isEmpty()) {
-                        JOptionPane.showMessageDialog(clientManagerView,"Please input valid data!");
+                            JOptionPane.showMessageDialog(clientManagerView,"Please input valid data!");
                         }
                         else
-                    {
-                        Client c1 = new Client(Integer.parseInt(s1), s2, s3, s4, Integer.parseInt(s5));
-                        ClientBLL cda = new ClientBLL();
-                        try{
-                            Client c = cda.findClientById(c1.getId());
-                            JOptionPane.showMessageDialog(clientManagerView,"ID already in use");
-                        }catch (IndexOutOfBoundsException exx) {
+                        {
+                            Client c1 = new Client(Integer.parseInt(s1), s2, s3, s4, Integer.parseInt(s5));
+                            ClientBLL cda = new ClientBLL();
                             try{
-                                Client cins = cda.insertClient(c1);
-                                JOptionPane.showMessageDialog(clientManagerView,"Client added successfully!");}
-                            catch (IllegalArgumentException exception){
-                                JOptionPane.showMessageDialog(clientManagerView,"Please input valid data! (review email and/or age)");
+                                Client c = cda.findClientById(c1.getId());
+                                JOptionPane.showMessageDialog(clientManagerView,"ID already in use");
+                            }catch (IndexOutOfBoundsException exx) {
+                                try{
+                                    Client cins = cda.insertClient(c1);
+                                    JOptionPane.showMessageDialog(clientManagerView,"Client added successfully!");}
+                                catch (IllegalArgumentException exception){
+                                    JOptionPane.showMessageDialog(clientManagerView,"Please input valid data! (review email and/or age)");
+                                }
                             }
                         }
-                    }
                         ClientBLL cbl = new ClientBLL();
                         List<Client> listClients = cbl.findAll();
                         tableModel.getDataVector().removeAllElements();
@@ -276,15 +277,15 @@ public class Controller {
                                 JOptionPane.showMessageDialog(clientManagerView, "ID not found!");
 
                             }
-                            }
-                            ClientBLL cbl2 = new ClientBLL();
-                            List<Client> listClients = cbl2.findAll();
-                            tableModel.getDataVector().removeAllElements();
-                            for (Client c : listClients) {
-                                String data[] = {String.valueOf(c.getId()), c.getName(), c.getAddress(), c.getEmail(), String.valueOf(c.getAge())};
-                                tableModel.addRow(data);
-                            }
                         }
+                        ClientBLL cbl2 = new ClientBLL();
+                        List<Client> listClients = cbl2.findAll();
+                        tableModel.getDataVector().removeAllElements();
+                        for (Client c : listClients) {
+                            String data[] = {String.valueOf(c.getId()), c.getName(), c.getAddress(), c.getEmail(), String.valueOf(c.getAge())};
+                            tableModel.addRow(data);
+                        }
+                    }
 
 
                 });
@@ -358,7 +359,7 @@ public class Controller {
                         List<Orders> listOrders= cbl2.findAll();
                         tableModel.getDataVector().removeAllElements();
                         for (Orders c : listOrders) {
-                           String data[] = {String.valueOf(c.getID()),String.valueOf(c.getClientID()),String.valueOf(c.getProductID()),String.valueOf(c.getTotalPrice())};
+                            String data[] = {String.valueOf(c.getID()),String.valueOf(c.getClientID()),String.valueOf(c.getProductID()),String.valueOf(c.getTotalPrice())};
                             tableModel.addRow(data);
                         }
 
@@ -386,14 +387,14 @@ public class Controller {
                             } catch (IndexOutOfBoundsException exception) {
                                 JOptionPane.showMessageDialog(orderManagerView, "ID not found");
                             }}
-                            OrderBLL cbl2 = new OrderBLL();
-                            List<Orders> listOrders = cbl2.findAll();
-                            tableModel.getDataVector().removeAllElements();
-                            for (Orders c : listOrders) {
-                                String data[] = {String.valueOf(c.getID()), String.valueOf(c.getClientID()), String.valueOf(c.getProductID()), String.valueOf(c.getTotalPrice())};
-                                tableModel.addRow(data);
-                            }
+                        OrderBLL cbl2 = new OrderBLL();
+                        List<Orders> listOrders = cbl2.findAll();
+                        tableModel.getDataVector().removeAllElements();
+                        for (Orders c : listOrders) {
+                            String data[] = {String.valueOf(c.getID()), String.valueOf(c.getClientID()), String.valueOf(c.getProductID()), String.valueOf(c.getTotalPrice())};
+                            tableModel.addRow(data);
                         }
+                    }
 
                 });
             }

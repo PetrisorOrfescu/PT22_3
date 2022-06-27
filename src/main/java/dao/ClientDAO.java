@@ -1,8 +1,8 @@
 package dao;
 
-import model.Client;
-
 import java.util.List;
+
+import model.Client;
 
 public class ClientDAO extends AbstractDAO<Client> {
     public Client findById(int id) {

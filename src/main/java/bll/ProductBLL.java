@@ -4,6 +4,7 @@ import bll.validators.ProductPriceValidator;
 import bll.validators.ProductStockValidator;
 import bll.validators.Validator;
 import dao.ProductDAO;
+import model.Client;
 import model.Product;
 
 import java.util.ArrayList;

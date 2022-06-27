@@ -1,5 +1,6 @@
 package bll;
 
+import bll.validators.*;
 import dao.ClientDAO;
 import model.Client;
 

@@ -1,10 +1,10 @@
 package start;
 
-import presentation.Controller;
-import presentation.MainView;
-
 import java.sql.SQLException;
 import java.util.logging.Logger;
+
+import presentation.Controller;
+import presentation.MainView;
 
 /**
  * @Author: Technical University of Cluj-Napoca, Romania Distributed Systems

@@ -1,5 +1,6 @@
 package bll.validators;
 
+import model.Client;
 import model.Product;
 
 public class ProductPriceValidator implements Validator<Product> {
